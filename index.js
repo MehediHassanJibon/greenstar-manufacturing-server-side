@@ -69,6 +69,12 @@ app.delete('/deleteOrder/:id', async (req, res) => {
   const result = await orderCollection.deleteOne(filter);
   res.send(result);
 })
+app.get('/order/:email', async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email }
+  const order = await orderCollection.find(filter).toArray();
+  res.send(order.reverse());
+});
 
   } finally {
       //   await client.close();
