@@ -16,6 +16,16 @@ async function run() {
   try {
       await client.connect();
       console.log('DB Connected');
+      const productCollection = client.db('greenstar-parts').collection('products');
+      const orderCollection = client.db('greenstar-parts').collection('orders');
+      const userCollection = client.db('greenstar-parts').collection('users');
+      const reviewCollection = client.db('greenstar-parts').collection('reviews');
+      app.get('/product', async (req, res) => {
+        const query = {};
+        const cursor = await productCollection.find(query);
+        const result = await cursor.toArray();
+        res.send(result);
+    });
   } finally {
       //   await client.close();
   }
