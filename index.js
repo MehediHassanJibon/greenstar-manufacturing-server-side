@@ -75,7 +75,12 @@ app.get('/order/:email', async (req, res) => {
   const order = await orderCollection.find(filter).toArray();
   res.send(order.reverse());
 });
-
+app.get('/payment/:id', async (req, res) => {
+  const id = req.params.id;
+  const filter = { _id: ObjectId(id) }
+  const order = await orderCollection.findOne(filter);
+  res.send(order);
+});
   } finally {
       //   await client.close();
   }
