@@ -48,7 +48,17 @@ app.post('/order', async (req, res) => {
   const result = await orderCollection.insertOne(product);
   res.send(result);
 });
-
+app.put('/getPayment/:id', async (req, res) => {
+  const id = req.params.id;
+  console.log(id);
+  const payment = req.body;
+  const filter = { _id: ObjectId(id) };
+  const updateDoc = {
+      $set: {
+          paid: true,
+          transactionId: payment.transactionId,
+      }
+  }
   } finally {
       //   await client.close();
   }
