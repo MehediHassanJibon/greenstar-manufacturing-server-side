@@ -92,6 +92,13 @@ app.put('/user/:email', async (req, res) => {
   const result = await userCollection.updateOne(filter, updateDoc, options);
   res.send(result);
 });
+app.get('/user/:email', async (req, res) => {
+  const email = req.params.email;
+  const filter = { email: email };
+  const user = await userCollection.findOne(filter);
+
+  res.send(user);
+});
   } finally {
       //   await client.close();
   }
