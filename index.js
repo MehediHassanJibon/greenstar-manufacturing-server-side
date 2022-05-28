@@ -59,6 +59,17 @@ app.put('/getPayment/:id', async (req, res) => {
           transactionId: payment.transactionId,
       }
   }
+
+  const updatedOrder = await orderCollection.updateOne(filter, updateDoc);
+  res.send(updatedOrder);
+})
+app.delete('/deleteOrder/:id', async (req, res) => {
+  const orderId = req.params.id;
+  const filter = { _id: ObjectId(orderId) };
+  const result = await orderCollection.deleteOne(filter);
+  res.send(result);
+})
+
   } finally {
       //   await client.close();
   }
